@@ -1,10 +1,10 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import Grid from "@material-ui/core/Grid";
-import DateFnsUtils from "@date-io/date-fns";
+// import Menu from "@material-ui/core/Menu";
+// import MenuItem from "@material-ui/core/MenuItem";
+// import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+// import Grid from "@material-ui/core/Grid";
+// import DateFnsUtils from "@date-io/date-fns";
 import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
 
@@ -60,9 +60,9 @@ const PopOverUpdate = props => {
           <form className="popoverForm"
             onSubmit={event => props.onTaskFormSubmit(event, props.formTask)}
           >
-            <label>
+            <label className="taskFormStyle">
               Title
-              <input
+              <textarea className="inputStyle"
                 type="text"
                 placeholder="Give your task a title"
                 name="title"
@@ -71,22 +71,15 @@ const PopOverUpdate = props => {
               />
             </label>
             <label>
-              Description
-            <TextareaAutosize
-              rowsMax={4}
-              aria-label="maximum height"
-              placeholder="Describe your task"
-              onChange={props.onFormValueChange}
-              name="task"
-              value={props.formTask.task}
-            />
+            {console.log(props.toDoArray)}
+
             </label>
-            <label className="container">
-              Completed ?
-              <input type="checkbox" name="completed" onChange={props.onFormValueChange} />
+            <label className="markComplete">
+              Mark Complete
+              <input type="checkbox" name="completed" onChange={props.onFormValueChange} value={props.formTask.completed}/>
               <span className="checkmark"></span>
             </label>
-            <button type="submit">Submit this task</button>
+            <button className="submitTask" type="submit">Submit</button>
             
           </form>
           </>

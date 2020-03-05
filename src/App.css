@@ -26,8 +26,40 @@
 }
 
 .popoverForm {
-  display: flex;
-  flex-direction: column;
+  width: 50vmin;
+  height: 30vmin;
+
 }
 
+.taskFormStyle {
+  margin: 50px 50px 0px 50px;
+  display: flex;
+justify-content: center;
+flex-direction: column;
+}
+
+.inputStyle {
+  height: 100px;
+}
+
+.submitTask {
+  margin: 5px 50px 5px 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+.markComplete {
+  margin: 0px 50px 0px 50px;
+  display: flex;
+justify-content: center;
+flex-direction: column;
+}
+
+
+.todoList {
+  display: flex;
+  justify-content: space-around;
+}
 

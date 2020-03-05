@@ -32,7 +32,6 @@ export const deleteTask = (taskId) => dispatch => {
   axiosWithAuth()
     .delete(`/todo/tasks/${taskId}`)
     .then(res => {
-      // item.filter(task => task.id !== taskId);
       dispatch({
         type: types.DELETE_TODO,
         payload: taskId

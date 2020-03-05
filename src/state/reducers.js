@@ -25,8 +25,8 @@ export const toDoReducer = (todo = initialTodo, action) => {
     case types.UPDATE_START:
       return { ...todo, currentId: action.payload };
     case types.UPDATE_TODO:
-      console.log(todo)
-      const newT = {...todo}
+      // console.log(todo)
+      // const newT = {...todo}
     return {...todo, initialTaskList: todo.initialTaskList.map(item => {
         if(action.payload.id === item.id ){
 return action.payload
