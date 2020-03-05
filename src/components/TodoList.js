@@ -16,7 +16,8 @@ import {
   submit,
   searchInputChange,
   deleteTask,
-  updateTask
+  updateTask,
+  openForm,
 } from "../state/actionCreators";
 import { connect } from "react-redux";
 
@@ -31,6 +32,8 @@ const TodoList = ({
   searchInputChange,
   deleteTask,
   updateTask,
+  currentId,
+  openForm,
   ...props
 }) => {
   const options = ["Completed", "Daily", "Monthly"];
@@ -67,7 +70,7 @@ const TodoList = ({
   };
 
   useEffect(() => {
-    debugger;
+    
     getTodoList();
   }, []);
 
@@ -75,19 +78,46 @@ const TodoList = ({
     inputChange(event.target.name, event.target.value);
   };
 
+  const onFormValueUpdateChange = event => {
+    inputChange(event.target.name, event.target.value);
+  };
+
   const onTaskFormSubmit = (event, form) => {
     event.preventDefault();
     const data = {
       title: form.title,
-      completed: form.completed
+      completed: (!form.completed) ? true : form.completed
     };
     postNewTask(data);
+    submit();
+  };
+
+  const onTaskFormUpdate = (event, form) => {
+    event.preventDefault();
+    debugger
+    const data = {
+      title: form.title,
+      completed: (!form.completed) ? true : form.completed
+    };
+    updateTask(data)
     submit();
   };
 
   const onSearchQueryChange = event => {
     searchInputChange(event.target.name, event.target.value);
   };
+
+  const onDelete = id => {
+    deleteTask(id)
+    
+  }
+  
+  const onUpdate = item => {
+    const data = {
+      title: item.title,
+      completed: (!item.completed) ? true : item.completed
+    };
+    openForm(item)  }
 
   // const searchingFor = toDoArray.filter(task => {
   //   debugger
@@ -99,7 +129,6 @@ const TodoList = ({
   return (
     <div>
       <div className="header">
-        {console.log(toDoArray, "seeing what this is")}
         <div>
           <IconButton
             aria-label="more"
@@ -163,10 +192,15 @@ const TodoList = ({
         return (
           <div key={item.id}>
             <Todo
+            onFormValueChange={onFormValueUpdateChange}
+            onTaskFormSubmit={onTaskFormUpdate}
+            formTask={formTask}
               taskItem={item}
-              deleteTask={deleteTask}
-              updateTask={updateTask}
+              deleteTask={()=>onDelete(item.id)}
+              updateTask={() => onUpdate(item)}
               formTask={formTask}
+              currentId={currentId}
+              toDoArray={toDoArray}
             />
           </div>
         );
@@ -177,9 +211,10 @@ const TodoList = ({
 
 const mapStateToProps = state => {
   return {
-    toDoArray: state.toDoList,
+    toDoArray: state.toDoList.initialTaskList,
     formTask: state.taskForm,
-    formSearch: state.searchForm
+    formSearch: state.searchForm,
+    currentId: state.toDoList.currentId
   };
 };
 
@@ -190,5 +225,6 @@ export default connect(mapStateToProps, {
   submit,
   searchInputChange,
   deleteTask,
-  updateTask
+  updateTask,
+  openForm
 })(withRouter(TodoList));

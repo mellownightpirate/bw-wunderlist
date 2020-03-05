@@ -6,6 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import PopOverUpdate from "./PopoverUpdate";
 
 const Todo = props => {
   const useStyles = makeStyles(theme => ({
@@ -64,23 +65,36 @@ const Todo = props => {
 
             <button
               style={{
-                fontWeight: "bold",
+                fontWeight: "bold"
               }}
-              onClick={() => props.updateTask(props.taskItem.id, props.formTask)}
+              onClick={() =>
+                props.updateTask(props.taskItem.id, props.formTask)
+              }
             >
               Update
             </button>
 
             <button
               style={{
-                fontWeight: "bold",
+                fontWeight: "bold"
               }}
               onClick={() => props.deleteTask(props.taskItem.id)}
             >
               Delete
             </button>
 
-           
+            {props.currentId == props.taskItem.id ? (
+              <div>
+                <PopOverUpdate
+                  onFormValueChange={props.onFormValueChange}
+                  onTaskFormSubmit={props.onTaskFormSubmit}
+                  formTask={props.formTask}
+                  toDoArray={props.toDoArray}
+                />{" "}
+              </div>
+            ) : (
+              <div></div>
+            )}
           </CardContent>
         </CardActionArea>
         <CardActions></CardActions>

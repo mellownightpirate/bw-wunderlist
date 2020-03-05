@@ -1,5 +1,15 @@
 import * as types from "./actionTypes";
-
+const initialTodo = {
+  initialTaskList : [
+    {
+      title: "Finish MVP",
+      task: "Wire REDUX",
+      setDate: "Today",
+      user_id: "4"
+    }
+  ],
+  currentId: null
+}
 const initialTaskList = [
   {
     title: "Finish MVP",
@@ -9,11 +19,20 @@ const initialTaskList = [
   }
 ];
 
-export const toDoReducer = (todo = initialTaskList, action) => {
+export const toDoReducer = (todo = initialTodo, action) => {
+
   switch (action.type) {
     case types.GET_TODOS:
-      debugger
-      return action.payload;
+      return {...todo, initialTaskList: action.payload};
+      case types.ADD_TODO:
+        return todo.initialTaskList.concat(action.payload);
+        case types.DELETE_TODO:
+          return todo.initialTaskList.filter(item=>{
+            return item.id != action.payload});
+          case types.UPDATE_START:
+            return {...todo, currentId: action.payload}
+            case types.UPDATE_TODO:
+              return todo
     default:
       return todo;
   }
