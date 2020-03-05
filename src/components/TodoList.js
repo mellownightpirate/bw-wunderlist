@@ -80,7 +80,7 @@ const TodoList = ({
   };
 
   const onFormValueUpdateChange = event => {
-    inputChange(event.target.name, event.target.value);
+    inputChange(event.target.name, event.target.value, event.target.checked);
   };
 
   const onTaskFormSubmit = (event, form) => {
@@ -99,7 +99,7 @@ const TodoList = ({
     const data = {
       id: currentId,
       title: form.title,
-      completed: (!form.completed) ? true : form.completed
+      completed: form.completed
     };
     updateTask(data)
     submit();
@@ -192,7 +192,7 @@ const TodoList = ({
       />
       {toDoArray.map(item => {
         return (
-          <div key={item.id}>
+          <div key={item.id} className="todoList">
             <Todo
             onFormValueChange={onFormValueUpdateChange}
             onTaskFormSubmit={onTaskFormUpdate}
@@ -200,9 +200,8 @@ const TodoList = ({
               taskItem={item}
               deleteTask={()=>onDelete(item.id)}
               updateTask={() => onUpdate(item)}
-              formTask={formTask}
               currentId={currentId}
-              toDoArray={toDoArray}
+              toDoArray={item}
             />
           </div>
         );

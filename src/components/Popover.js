@@ -1,10 +1,10 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import Grid from "@material-ui/core/Grid";
-import DateFnsUtils from "@date-io/date-fns";
+// import Menu from "@material-ui/core/Menu";
+// import MenuItem from "@material-ui/core/MenuItem";
+// import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+// import Grid from "@material-ui/core/Grid";
+// import DateFnsUtils from "@date-io/date-fns";
 import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
 
@@ -60,28 +60,19 @@ const PopOver = props => {
           <form className="popoverForm"
             onSubmit={event => props.onTaskFormSubmit(event, props.formTask)}
           >
-            <label>
-              Title
-              <input
+            <label className="taskFormStyle">
+              Todo:
+              <textarea className="inputStyle"
                 type="text"
-                placeholder="Give your task a title"
+                placeholder="Describe your todo here..."
                 name="title"
                 onChange={props.onFormValueChange}
                 value={props.formTask.title}
               />
             </label>
-            <label>
-              Description
-            <TextareaAutosize
-              rowsMax={4}
-              aria-label="maximum height"
-              placeholder="Describe your task"
-              onChange={props.onFormValueChange}
-              name="task"
-              value={props.formTask.task}
-            />
-            </label>
-            <button type="submit">Submit this task</button>
+           
+        
+            <button className="submitTask" type="submit">Submit</button>
             
           </form>
           </>

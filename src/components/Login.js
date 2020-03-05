@@ -21,7 +21,7 @@ const Login = props => {
 
   const onLogin = event => {
     event.preventDefault();
-    const test = userCreds 
+    // const test = userCreds 
     axiosWithAuth()
       .post("/auth/login", userCreds)
       .then(res => {
