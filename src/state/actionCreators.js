@@ -49,21 +49,24 @@ export const openForm = (item) => dispatch => {
 }
 
 export const updateTask = (item) => dispatch => {
- debugger
   axiosWithAuth()
     .put(`/todo/tasks/${item.id}`, {title: item.title, completed: item.completed})
     .then(res => {
-      debugger
+      dispatch({
+        type: types.UPDATE_TODO,
+        payload: res.data
+      })
     })
     .catch(err => {debugger});
 };
 
-export const inputChange = (name, value) => {
+export const inputChange = (name, value, checked) => {
   return {
     type: types.INPUT_CHANGE,
     payload: {
       name,
-      value
+      value,
+      checked
     }
   };
 };

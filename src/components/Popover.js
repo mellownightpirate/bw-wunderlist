@@ -81,11 +81,6 @@ const PopOver = props => {
               value={props.formTask.task}
             />
             </label>
-            <label className="container">
-              Completed ?
-              <input type="checkbox" name="completed" onChange={props.onFormValueChange} />
-              <span className="checkmark"></span>
-            </label>
             <button type="submit">Submit this task</button>
             
           </form>

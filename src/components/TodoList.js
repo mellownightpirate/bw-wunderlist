@@ -75,7 +75,8 @@ const TodoList = ({
   }, []);
 
   const onFormValueChange = event => {
-    inputChange(event.target.name, event.target.value);
+    console.log(event.target.checked)
+    inputChange(event.target.name, event.target.value, event.target.checked);
   };
 
   const onFormValueUpdateChange = event => {
@@ -84,9 +85,10 @@ const TodoList = ({
 
   const onTaskFormSubmit = (event, form) => {
     event.preventDefault();
+    debugger
     const data = {
       title: form.title,
-      completed: (!form.completed) ? true : form.completed
+      completed: form.completed
     };
     postNewTask(data);
     submit();
@@ -94,8 +96,8 @@ const TodoList = ({
 
   const onTaskFormUpdate = (event, form) => {
     event.preventDefault();
-    debugger
     const data = {
+      id: currentId,
       title: form.title,
       completed: (!form.completed) ? true : form.completed
     };
